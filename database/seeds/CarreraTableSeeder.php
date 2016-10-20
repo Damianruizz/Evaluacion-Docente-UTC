@@ -11,32 +11,32 @@ class CarreraTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Carrera')->insert([
+        DB::table('carrera')->insert([
             'carrera' => 'TUR',
             'descripcion' => 'Turismo',
         ]);
 
-        DB::table('Carrera')->insert([
+        DB::table('carrera')->insert([
             'carrera' => 'ADMIN',
             'descripcion' => 'Administracion de Empresas',
         ]);
 
-        DB::table('Carrera')->insert([
+        DB::table('carrera')->insert([
             'carrera' => 'DIS',
             'descripcion' => 'Diseño Grafico',
         ]);
 
-        DB::table('Carrera')->insert([
+        DB::table('carrera')->insert([
             'carrera' => 'PED',
             'descripcion' => 'Pedagogia',
         ]);
 
-        DB::table('Carrera')->insert([
+        DB::table('carrera')->insert([
             'carrera' => 'DER',
             'descripcion' => 'Derecho',
         ]);
 
-        DB::table('Carrera')->insert([
+        DB::table('carrera')->insert([
             'carrera' => 'CON',
             'descripcion' => 'Contabilidad',
         ]);

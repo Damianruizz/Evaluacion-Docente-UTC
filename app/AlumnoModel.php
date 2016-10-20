@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class AlumnoModel extends Model
 {
-    protected $table = 'Alumno';
+    protected $table = 'alumno';
     protected $fillable = [
-        'idAlumno', 'Nombre', 'APaterno', 'AMaterno', 'correo', 'Contrasena', 'company_id',
+        'Nombre', 'APaterno', 'AMaterno', 'correo', 'Contrasena', 'company_id',
     ];
 
     public function grupo()

@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class CuatrimestreModel extends Model
 {
-    protected $table = 'Cutrimestre';
+    protected $table = 'cuatrimestre';
     protected $fillable = [
-        'idCutrimestre' ,'cutrimestre',
+        'cutrimestre',
     ];
 
     public function grupos()

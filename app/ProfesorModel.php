@@ -8,7 +8,7 @@ class ProfesorModel extends Model
 {
     protected $table = 'profesor';
     protected $fillable = [
-        'idProfesor', 'Nombre', 'APaterno', 'AMaterno',
+        'Nombre', 'APaterno', 'AMaterno',
     ];
 
     public function grupos()

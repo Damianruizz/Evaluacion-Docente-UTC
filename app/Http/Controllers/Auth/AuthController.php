@@ -141,7 +141,7 @@ class AuthController extends Controller
         
 
 
-        $admin = User::where('user', 'Admin')->first();
+        $admin = User::where('admin', true)->first();
         // Verificamos los datos
         if (Auth::attempt($data)) // Como segundo parámetro pasámos el checkbox para sabes si queremos recordar la contraseña
         {

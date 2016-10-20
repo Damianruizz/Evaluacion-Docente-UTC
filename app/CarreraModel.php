@@ -8,7 +8,7 @@ class CarreraModel extends Model
 {
     protected $table = 'carrera';
     protected $fillable = [
-        'idCarrera' ,'carrera', 'descripcion',
+        'carrera', 'descripcion',
     ];
 
     public function grupos()

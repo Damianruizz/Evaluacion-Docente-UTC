@@ -8,7 +8,7 @@ class GrupoModel extends Model
 {
     protected $table = 'grupo';
     protected $fillable = [
-        'idGrupo', 'idTruno', 'idCarrera', 'idCuatrimestre', 'grupo',
+        'Truno_id', 'Carrera_id', 'Cuatrimestre_id', 'Grupo',
     ];
 
 

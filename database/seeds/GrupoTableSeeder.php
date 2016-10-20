@@ -7,49 +7,49 @@ class GrupoTableSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
+     * @return  void
      */
     public function run()
     {
         DB::table('grupo')->insert([
-            'idTurno' => 1,
-            'idCarrera'  => 1,
-            'idCutrimestre'   => 1,
+            'Turno_id' => 1,
+            'Carrera_id'  => 1,
+            'Cutrimestre_id'   => 1,
             'grupo'   => "A",
         ]);
 
         DB::table('grupo')->insert([
-            'idTurno' => 1,
-            'idCarrera'  => 2,
-            'idCutrimestre'   => 1,
+            'Turno_id' => 1,
+            'Carrera_id'  => 2,
+            'Cutrimestre_id'   => 1,
             'grupo'   => "A",
         ]);
 
         DB::table('grupo')->insert([
-            'idTurno' => 1,
-            'idCarrera'  => 3,
-            'idCutrimestre'   => 1,
+            'Turno_id' => 1,
+            'Carrera_id'  => 3,
+            'Cutrimestre_id'   => 1,
             'grupo'   => "A",
         ]);
 
         DB::table('grupo')->insert([
-            'idTurno' => 1,
-            'idCarrera'  => 4,
-            'idCutrimestre'   => 1,
+            'Turno_id' => 1,
+            'Carrera_id'  => 4,
+            'Cutrimestre_id'   => 1,
             'grupo'   => "A",
         ]);
 
         DB::table('grupo')->insert([
-            'idTurno' => 1,
-            'idCarrera'  => 5,
-            'idCutrimestre'   => 1,
+            'Turno_id' => 1,
+            'Carrera_id'  => 5,
+            'Cutrimestre_id'   => 1,
             'grupo'   => "A",
         ]);
 
         DB::table('grupo')->insert([
-            'idTurno' => 1,
-            'idCarrera'  => 6,
-            'idCutrimestre'   => 1,
+            'Turno_id' => 1,
+            'Carrera_id'  => 6,
+            'Cutrimestre_id'   => 1,
             'grupo'   => "A",
         ]);
     }

@@ -11,39 +11,39 @@ class CuatrimestreTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Cutrimestre')->insert([
+        DB::table('cuatrimestre')->insert([
             'cuatrimestre' => '1',
         ]);
 
-        DB::table('Cutrimestre')->insert([
+        DB::table('cuatrimestre')->insert([
             'cuatrimestre' => '2',
         ]);
 
-        DB::table('Cutrimestre')->insert([
+        DB::table('cuatrimestre')->insert([
             'cuatrimestre' => '3',
         ]);
 
-        DB::table('Cutrimestre')->insert([
+        DB::table('cuatrimestre')->insert([
             'cuatrimestre' => '4',
         ]);
 
-        DB::table('Cutrimestre')->insert([
+        DB::table('cuatrimestre')->insert([
             'cuatrimestre' => '5',
         ]);
 
-        DB::table('Cutrimestre')->insert([
+        DB::table('cuatrimestre')->insert([
             'cuatrimestre' => '6',
         ]);
 
-        DB::table('Cutrimestre')->insert([
+        DB::table('cuatrimestre')->insert([
             'cuatrimestre' => '7',
         ]);
 
-        DB::table('Cutrimestre')->insert([
+        DB::table('cuatrimestre')->insert([
             'cuatrimestre' => '8',
         ]);
 
-        DB::table('Cutrimestre')->insert([
+        DB::table('cuatrimestre')->insert([
             'cuatrimestre' => '9',
         ]);
     }

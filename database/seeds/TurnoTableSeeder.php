@@ -11,11 +11,11 @@ class TurnoTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Turno')->insert([
+        DB::table('turno')->insert([
             'turno' => 'Matutino',
         ]);
 
-        DB::table('Turno')->insert([
+        DB::table('turno')->insert([
             'turno' => 'Vespertino',
         ]);
     }

@@ -13,26 +13,26 @@ class ProfesorTableSeeder extends Seeder
     {
         DB::table('profesor')->insert([
             'Nombre' => 'Ericka',
-            'APaterno'  => 'Arellano',
-            'AMaterno'   => 'Orozco',
+            'Apellido_Paterno'  => 'Arellano',
+            'Apellido_Materno'   => 'Orozco',
         ]);
 
         DB::table('profesor')->insert([
             'Nombre' => 'Jaime',
-            'APaterno'  => 'Minor',
-            'AMaterno'   => 'Gomez',
+            'Apellido_Paterno'  => 'Minor',
+            'Apellido_Materno'   => 'Gomez',
         ]);
 
         DB::table('profesor')->insert([
             'Nombre' => 'Angel',
-            'APaterno'  => 'Barrientos',
-            'AMaterno'   => 'P.',
+            'Apellido_Paterno'  => 'Barrientos',
+            'Apellido_Materno'   => 'P.',
         ]);
 
         DB::table('profesor')->insert([
             'Nombre' => 'Miguel Angel',
-            'APaterno'  => 'Pi',
-            'AMaterno'   => 'P.',
+            'Apellido_Paterno'  => 'Pi',
+            'Apellido_Materno'   => 'P.',
         ]);
     }
 }

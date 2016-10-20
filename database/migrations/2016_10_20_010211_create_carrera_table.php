@@ -16,6 +16,7 @@ class CreateCarreraTable extends Migration
 
             $table->increments('id');
             $table->string('carrera');
+            $table->string('descripcion');
             $table->timestamps();
         });
     }

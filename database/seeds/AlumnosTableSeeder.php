@@ -11,7 +11,16 @@ class AlumnosTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Alumno')->insert([
+        DB::table('alumno')->insert([
+            'Nombre' => 'Damian',
+            'Apellido_Paterno'  => 'Ruiz',
+            'Apellido_Materno'   => 'Ponce',
+            'Contrasena'      => '441040',
+            'Matricula' => '441-040',
+            'Grupo_id' => 1,
+        ]);            
+
+        DB::table('alumno')->insert([
             'Nombre' => 'Samuel',
             'Apellido_Paterno'  => 'Flores',
             'Apellido_Materno'   => 'Martinez',
@@ -20,7 +29,7 @@ class AlumnosTableSeeder extends Seeder
             'Grupo_id' => 2,
         ]);
 
-        DB::table('Alumno')->insert([
+        DB::table('alumno')->insert([
             'Nombre' => 'Pedro',
             'Apellido_Paterno'  => 'Infante',
             'Apellido_Materno'   => 'Luna',
@@ -29,7 +38,7 @@ class AlumnosTableSeeder extends Seeder
             'Grupo_id' => 3,
         ]);
 
-        DB::table('Alumno')->insert([
+        DB::table('alumno')->insert([
             'Nombre' => 'Israel',
             'Apellido_Paterno'  => 'Jaitovich',
             'Apellido_Materno'   => 'Mata',
@@ -38,7 +47,7 @@ class AlumnosTableSeeder extends Seeder
             'Grupo_id' => 4,
         ]);
 
-        DB::table('Alumno')->insert([
+        DB::table('alumno')->insert([
             'Nombre' => 'Cristiano',
             'Apellido_Paterno'  => 'Ronaldo',
             'Apellido_Materno'   => 'Contreras',
@@ -47,7 +56,7 @@ class AlumnosTableSeeder extends Seeder
             'Grupo_id' => 5,
         ]);
 
-        DB::table('Alumno')->insert([
+        DB::table('alumno')->insert([
             'Nombre' => 'Julio',
             'Apellido_Paterno'  => 'Jaramillo',
             'Apellido_Materno'   => 'Perez',
