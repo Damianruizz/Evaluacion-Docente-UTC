@@ -18,7 +18,7 @@ class CreateUserTable extends Migration
             $table->string('name');
             $table->string('password');
             $table->boolean('admin')->nullable();
-            $table->boolean('evaluation')->nullable();
+            $table->string('evaluation')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

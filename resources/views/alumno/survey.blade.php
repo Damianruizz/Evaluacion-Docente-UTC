@@ -43,7 +43,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ URL::to('homealumn/' . $alumno['idAlumno']) }}">Inicio</a>
+                <a class="navbar-brand" href="{{ URL::to('homealumn/' . $alumno['id']) }}">Inicio</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -63,7 +63,7 @@
 
         <div class="row" id="enc">
           <div class="col-lg-12 text-center">
-            <h1>Evaluando a <?php echo $profesor['Nombre']." ".$profesor['APaterno']?></h1>
+            <h1>Evaluando a <?php echo $profesor['Nombre']." ".$profesor['Apellido_Paterno']." ".$profesor['Apellido_Materno']?></h1>
             <p class="lead">Sistema de Evaluacion docente UTC</p>
           </div>
         </div>
@@ -1244,9 +1244,9 @@
               </td>              
 
               <td>
-                <input type="hidden" name="profesor" value="{{ $profesor['idProfesor'] }}">
+                <input type="hidden" name="profesor" value="{{ $profesor['id'] }}">
                 <input type="hidden" name="carrera" value="{{ $carrera }}">
-                <input type="hidden" name="idAlumno" value="{{ $alumno['idAlumno'] }}">
+                <input type="hidden" name="idAlumno" value="{{ $alumno['id'] }}">
               </td>
 
             </form>

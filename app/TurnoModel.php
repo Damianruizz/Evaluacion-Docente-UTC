@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TurnoModel extends Model
 {
-    protected $table = 'Turno';
+    protected $table = 'turno';
     protected $fillable = [
         'turno',
     ];

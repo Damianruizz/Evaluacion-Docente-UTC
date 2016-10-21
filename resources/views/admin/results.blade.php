@@ -74,7 +74,7 @@
         <!-- /.row -->
         <br>
         <div class="col-lg-12 text-center">
-            <h3>Total de Evaluaciones:              <?php echo $num_evaluaciones ?></h3>
+            <h3>Total de Evaluaciones: <?php echo $num_evaluaciones ?></h3>
         </div>
         <br><br><br><br><br><br>
 
@@ -135,7 +135,7 @@
         <br><br>
         <h3>Promedio de General de Evaluacion:   <?php echo $promedio ?></h3>
         <br><br>
-        <a href="{{ route('conscom', $maestro['idProfesor']) }}" id="destroy" class="btn btn-primary">Consultar Comentarios</a>
+        <a href="{{ route('conscom', $maestro['id']) }}" id="destroy" class="btn btn-primary">Consultar Comentarios</a>
     </div>
     <br><br>
 

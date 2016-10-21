@@ -107,7 +107,7 @@ class AuthController extends Controller
 
             $alumnos = AlumnoModel::all();
             $profesores_data = ProfesorModel::all();          
-            $admin = User::where('User', 'Admin')->first();
+            $admin = User::where('admin', true)->first();
 
             $carreras = CarreraModel::all();
             $sistemas = $this->promedio_carreras('Ing. En Sistemas Computacionales');
@@ -156,12 +156,12 @@ class AuthController extends Controller
             $contabilidad = $this->promedio_carreras('Contabilidad');
             return View::make("admin/hello", array("alumnos" => $alumnos, "maestros" => $profesores_data, "admin" => $admin, "carreras" => $carreras, "sistemas" => $sistemas, "turismo" => $turismo, "admon" => $admon, "diseno" => $diseno, "pedagogia" => $pedagogia, "derecho" => $derecho, "contabilidad" => $contabilidad));
         } else {
-            if ($alumno = AlumnoModel::where('idAlumno', $matricula)->first()) {
+            if ($alumno = AlumnoModel::where('Matricula', $matricula)->first()) {
                 
                 if ( $alumno['Contrasena'] == $contraseña ){
                     if ( $admin["evaluation"] != null ){
 
-                        $grupo = GrupoModel::where('idGrupo', $alumno['Grupo_id'])->first();
+                        $grupo = GrupoModel::find($alumno['Grupo_id']);
                         $array = array();
                         //array_push($array, "manzana", "arándano");
 
@@ -171,16 +171,18 @@ class AuthController extends Controller
 
                             $number = $asignados[$clave];
 
-                            if ($number['Grupo_id'] == $grupo['idGrupo']){
-                                array_push($array, ProfesorModel::where('idProfesor', $number['Profesor_id'])->first());
+                            if ($number['Grupo_id'] == $grupo['id']){
+                                array_push($array, ProfesorModel::where('id', $number['Profesor_id'])->first());
                             }
                         }
 
                         $maestros = array_unique($array);
 
-                        $carrera = CarreraModel::where('idCarrera', $grupo['idCarrera'])->first();
-                        $cuatrimestre = CuatrimestreModel::where('idCutrimestre', $grupo['idCutrimestre'])->first();
-                        $turno = TurnoModel::where('idTurno', $grupo['idTurno'])->first();
+                        $carrera = CarreraModel::find($grupo['Carrera_id']);
+                        $cuatrimestre = CuatrimestreModel::find($grupo['Cutrimestre_id']);
+                        $turno = TurnoModel::find($grupo['Turno_id']);
+                        
+                        //return dd($maestros);
                         return View::make("alumno/helloa", array("alumno" => $alumno, "profesores_data" => $maestros, "grupo" => $grupo, "carrera" => $carrera, "turno" => $turno, "cuatrimestre" => $cuatrimestre));
                     } else {
                         return View::make("disabled");

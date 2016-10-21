@@ -44,7 +44,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ URL::to('homealumn/' . $alumno['idAlumno']) }}">Inicio</a>
+                <a class="navbar-brand" href="{{ URL::to('homealumn/' . $alumno['id']) }}">Inicio</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -68,13 +68,13 @@
 
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>¡Bienvenido(a) <?php echo $alumno['Nombre']." ".  $alumno['APaterno']?>!</h1>
+                <h1>¡Bienvenido(a) <?php echo $alumno['Nombre']." ".  $alumno['Apellido_Paterno']." ".  $alumno['Apellido_Materno']?>!</h1>
                 <p class="lead">Sistema de Evaluacion docente UTC</p>
                 <ul class="list-unstyled">
-                    <li>Cuatrimestre: <?php echo $grupo['idCutrimestre'] ?></li>
+                    <li>Cuatrimestre: <?php echo $grupo['Cutrimestre_id'] ?></li>
                     <li>Carrera: <?php echo $carrera['descripcion'] ?></li>
                     <li>Turno: <?php echo $turno['turno'] ?></li>
-                    <li>Grupo: <?php echo $grupo['idCutrimestre'] ?><?php echo $carrera['carrera'] ?><?php echo $turno['idTurno'] ?><?php echo $grupo['grupo'] ?></li>
+                    <li>Grupo: <?php echo $grupo['Cutrimestre_id'] ?><?php echo $carrera['carrera'] ?><?php echo $grupo['Turno_id'] ?><?php echo $grupo['Grupo'] ?></li>
                 </ul>
             </div>
         </div>
@@ -90,7 +90,7 @@
         <ul class="list-group">
             @foreach($profesores_data as $key => $value)
                 @if($profesores_data[$key])
-                    <li class="list-group-item"><a href="{{ URL::to('evaluation/'.$value->idProfesor.'/'.$carrera['descripcion'].'/'.$alumno['idAlumno']) }}" id="list" class="btn btn-primary"><h3>{{ $value->Nombre }} <?php echo "" . " " . "" ?> {{ isset($value->APaterno) ? $value->APaterno : 'Default' }} <?php echo "" . " " . "" ?> {{ isset($value->AMaterno) ? $value->AMaterno : 'Default' }}</h3></a></li>
+                    <li class="list-group-item"><a href="{{ URL::to('evaluation/'.$value->id.'/'.$carrera['descripcion'].'/'.$alumno['id']) }}" id="list" class="btn btn-primary"><h3>{{ $value->Nombre }} <?php echo "" . " " . "" ?> {{ isset($value->Apellido_Paterno) ? $value->Apellido_Paterno : 'Default' }} <?php echo "" . " " . "" ?> {{ isset($value->Apellido_Materno) ? $value->Apellido_Materno : 'Default' }}</h3></a></li>
                 @endif            
             @endforeach
         </ul>

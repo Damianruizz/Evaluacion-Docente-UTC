@@ -40,7 +40,7 @@ class ProfesorController extends Controller
 
     public function promedio_carrera($carrera, $maestro){
 
-        $evaluacion_carrera = EvaluacionModel::where('Profesor_id', $maestro['idProfesor'])->where('carrera', $carrera)->get();
+        $evaluacion_carrera = EvaluacionModel::where('Profesor_id', $maestro['id'])->where('carrera', $carrera)->get();
         
         $sum_total = 0;
         $diez = 0;
@@ -74,9 +74,9 @@ class ProfesorController extends Controller
     public function results($profesor)
     {
         //Encontrar al maestro en la base de datos
-        $maestro = ProfesorModel::where('idProfesor', $profesor)->first();
+        $maestro = ProfesorModel::find($profesor);
         //where de todas las calificaciones de ese maestro
-        $evaluacion = EvaluacionModel::where('Profesor_id', $maestro['idProfesor'])->get();
+        $evaluacion = EvaluacionModel::where('Profesor_id', $maestro['id'])->get();
 
         //Obtener cada calificacion
         $sum_total = 0;
@@ -230,7 +230,7 @@ class ProfesorController extends Controller
     public function boolean()
     {
         $option = Input::get('admin_option');
-        $admin = User::where('User', 'Admin')->first();
+        $admin = User::where('admin', true)->first();
         //$admin = User::find(1);
 
         $admin->evaluation = $option;
@@ -281,10 +281,10 @@ class ProfesorController extends Controller
 
     public function carrera_prof($idCarrera)
     {
-        $carrera = CarreraModel::where('idCarrera', $idCarrera)->first();
+        $carrera = CarreraModel::find($idCarrera);
 
         //$maestros = EvaluacionModel::where('Profesor_id', $maestro['idProfesor'])->where('carrera', $carrera)->get();
-        $grupos = GrupoModel::where('idCarrera', $carrera['idCarrera'])->get();
+        $grupos = GrupoModel::where('Carrera_id', $carrera['id'])->get();
 
         $array = array();
         //array_push($array, "manzana", "arándano");
@@ -298,7 +298,6 @@ class ProfesorController extends Controller
 
         $maestros = array_unique($result);
 
-        //return dd($maestros);
         return View::make("admin/profesor_carrera", array("carrera" => $carrera, "maestros" => $maestros));
     }
 
@@ -308,8 +307,8 @@ class ProfesorController extends Controller
 
             $number = $asignados[$clave];
 
-            if ($number['Grupo_id'] == $grupos[$count]['idGrupo']){
-                array_push($array, ProfesorModel::where('idProfesor', $number['Profesor_id'])->first());
+            if ($number['Grupo_id'] == $grupos[$count]['id']){
+                array_push($array, ProfesorModel::where('id', $number['Profesor_id'])->first());
             }
         }
         
@@ -327,7 +326,7 @@ class ProfesorController extends Controller
     {
         //return "HOLA AMIGO";
         $comentarios = CommentModel::where('Profesor_id', $idProfesor)->get();
-        $profesor = ProfesorModel::where('idProfesor', $idProfesor)->first();
+        $profesor = ProfesorModel::find($idProfesor);
 
         return View::make("admin/comments", array("comentarios" => $comentarios, "profesor" => $profesor));
     }

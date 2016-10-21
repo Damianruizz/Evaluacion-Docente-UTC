@@ -69,19 +69,43 @@ class AlumnoController extends Controller
         $profesor = Input::get('profesor');
         $carrera = Input::get('carrera');
         $comentario = Input::get('comentario');
+        $alumno_id = Input::get('alumno');
 
         $carrera_id = CarreraModel::where('descripcion', $carrera)->first();
-
 
         $comment = new CommentModel;
 
         $comment->comentario = $comentario;
         $comment->Profesor_id = $profesor;
-        $comment->Carrera_id = $carrera_id['idCarrera'];
+        $comment->Carrera_id = $carrera_id['id'];
 
         $comment->save();
 
-        return View::make("welcome");
+        $alumno = AlumnoModel::find($alumno_id);
+        $array = array();
+
+        $asignados = Profesor_Grupo::all();
+        $grupo = GrupoModel::where('id', $alumno['Grupo_id'])->first();
+
+        foreach($asignados as $clave => $valor){
+
+            $number = $asignados[$clave];
+
+            if ($number['Grupo_id'] == $grupo['id']){
+                array_push($array, ProfesorModel::where('id', $number['Profesor_id'])->first());
+            }
+        }
+
+       $maestros = array_unique($array);
+
+       $admin = User::where('admin', true)->first();
+
+       $carrera = CarreraModel::find($grupo['Carrera_id']);
+       $turno = TurnoModel::find($grupo['Turno_id']);
+
+       return View::make("alumno/helloa", array("alumno" => $alumno, "profesores_data" => $maestros, "grupo" => $grupo, "carrera" => $carrera, "turno" => $turno));
+
+        //return View::make("welcome");
     }
 
 
@@ -128,7 +152,7 @@ class AlumnoController extends Controller
         $carrera = Input::get('carrera');
         $id_alumno = Input::get('idAlumno');
 
-        $profesor_obj = ProfesorModel::where('idProfesor', $profesor)->first();
+        $profesor_obj = ProfesorModel::find($profesor);
 
         //Calculando el total
         $total = 0;
@@ -238,7 +262,7 @@ class AlumnoController extends Controller
 
         $evaluacion_alumno->save();
 
-        $alumno = AlumnoModel::where('idAlumno', $id_alumno)->first();
+        $alumno = AlumnoModel::find($id_alumno);
         // Se que profesor es y que calificacion saco, la tengo que guardar despues recorrer los guardados, 
         //sumarlos y eso es lo que voy a mostrar al administrador en la otra visa de resultados.
 
@@ -249,8 +273,8 @@ class AlumnoController extends Controller
 
     public function survey($id_profesor, $carrera, $id_alumno)
     {
-        $profesor = ProfesorModel::where('idProfesor', $id_profesor)->first();
-        $alumno = AlumnoModel::where('idAlumno', $id_alumno)->first();
+        $profesor = ProfesorModel::find($id_profesor);
+        $alumno = AlumnoModel::find($id_alumno);
 
         //return "Hola encuesta";
 
@@ -295,31 +319,29 @@ class AlumnoController extends Controller
     }
 
     public function home($id){
-       $alumno = AlumnoModel::where('idAlumno', $id)->first();
-       //$alumno = AlumnoModel::find($id);
+       //$alumno = AlumnoModel::where('idAlumno', $id)->first();
+       $alumno = AlumnoModel::find($id);
        $array = array();
 
         $asignados = Profesor_Grupo::all();
-        $grupo = GrupoModel::where('idGrupo', $alumno['Grupo_id'])->first();
+        $grupo = GrupoModel::where('id', $alumno['Grupo_id'])->first();
 
         foreach($asignados as $clave => $valor){
 
             $number = $asignados[$clave];
 
-            if ($number['Grupo_id'] == $grupo['idGrupo']){
-                array_push($array, ProfesorModel::where('idProfesor', $number['Profesor_id'])->first());
+            if ($number['Grupo_id'] == $grupo['id']){
+                array_push($array, ProfesorModel::where('id', $number['Profesor_id'])->first());
             }
         }
 
        $maestros = array_unique($array);
        //$admin = User::find(1);
-       $admin = User::where('user', 'Admin')->first();
+       $admin = User::where('admin', true)->first();
 
-       
-       //$grupo = GrupoModel::where('id', $alumno['Grupo_id'])->first();
+       $carrera = CarreraModel::find($grupo['Carrera_id']);
+       $turno = TurnoModel::find($grupo['Turno_id']);
 
-       $carrera = CarreraModel::where('idCarrera', $grupo['idCarrera'])->first();
-       $turno = TurnoModel::where('idTurno', $grupo['idTurno'])->first();
        return View::make("alumno/helloa", array("alumno" => $alumno, "profesores_data" => $maestros, "grupo" => $grupo, "carrera" => $carrera, "turno" => $turno));
     }
 }

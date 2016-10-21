@@ -84,7 +84,7 @@
         <br>
         <ul class="list-group">
             @foreach($carreras as $key => $value)
-                <li class="list-group-item"><a href="{{ route('carrera_prof', $value->idCarrera) }}" id="list" class="btn btn-primary"><h3>{{ $value->descripcion }}</h3></a></li>
+                <li class="list-group-item"><a href="{{ route('carrera_prof', $value->id) }}" id="list" class="btn btn-primary"><h3>{{ $value->descripcion }}</h3></a></li>
             @endforeach
         </ul>
         <br><br>

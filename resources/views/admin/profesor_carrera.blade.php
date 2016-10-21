@@ -80,7 +80,7 @@
         <ul class="list-group">
             @foreach($maestros as $key => $value)
                 @if($maestros[$key])
-                    <li class="list-group-item"><a href="{{ route('results', $value->idProfesor) }}" id="list2" class="btn btn-primary"><h3>{{ $value->Nombre }} {{ isset($value->APaterno) ? $value->APaterno : ' ' }} {{ isset($value->AMaterno) ? $value->AMaterno : ' ' }}</h3></a></li>
+                    <li class="list-group-item"><a href="{{ route('results', $value->id) }}" id="list2" class="btn btn-primary"><h3>{{ $value->Nombre }} {{ isset($value->APaterno) ? $value->APaterno : ' ' }} {{ isset($value->AMaterno) ? $value->AMaterno : ' ' }}</h3></a></li>
                 @endif
             @endforeach 
         </ul>   

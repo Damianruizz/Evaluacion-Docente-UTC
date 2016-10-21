@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ URL::to('homealumn/' . $alumno['idAlumno']) }}">Inicio</a>
+                <a class="navbar-brand" href="{{ URL::to('homealumn/' . $alumno['id']) }}">Inicio</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -51,7 +51,7 @@
 
         <div class="row" id="enc">
           <div class="col-lg-12 text-center">
-            <h1>Evaluando a <?php echo $profesor['Nombre']." ".$profesor['APaterno']?></h1>
+            <h1>Evaluando a <?php echo $profesor['Nombre']." ".$profesor['Apellido_Paterno']." ".$profesor['Apellido_Materno']?></h1>
             <p class="lead">Sistema de Evaluacion docente UTC</p>
             <br><br>
           </div>
@@ -59,7 +59,7 @@
 
         <p class="lead">Muchas gracias por tu evaluacion. Tu opinion es muy importante para nosotros.</p>
         <p class="lead">Tu opinion nos permite mejorar el rendimiento de los maestros en la Universidad.</p>
-        <p class="lead">Para concluir con la evaluacion de el profesor <?php echo $profesor['Nombre']." ".$profesor['APaterno']?> dejanos un comentario breve de su desempeño en el aula. Este comentario es anonimo y confidencial.</p>
+        <p class="lead">Para concluir con la evaluacion de el profesor <?php echo $profesor['Nombre']." ".$profesor['Apellido_Paterno']." ".$profesor['Apellido_Materno']?> dejanos un comentario breve de su desempeño en el aula. Este comentario es anonimo y confidencial.</p>
 
         <br><br>
 
@@ -70,8 +70,9 @@
             <textarea name="comentario" class="form-control" rows="6" id="comment"></textarea>
           </div>
 
-          <input type="hidden" name="profesor" value="{{ $profesor['idProfesor'] }}">
+          <input type="hidden" name="profesor" value="{{ $profesor['id'] }}">
           <input type="hidden" name="carrera" value="{{ $carrera }}">
+          <input type="hidden" name="alumno" value="{{ $alumno['id'] }}">
           <button type="submit" id="boton" class="btn btn-primary">Enviar</button>
         </form>        
 
