@@ -31,39 +31,7 @@ class AlumnoController extends Controller
         return View::make("alumno/helloa", array("maestros" => $maestros));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-
-    
+   
     public function insert_comment()
     {
         $profesor = Input::get('profesor');
@@ -81,34 +49,10 @@ class AlumnoController extends Controller
 
         $comment->save();
 
-        $alumno = AlumnoModel::find($alumno_id);
-        $array = array();
-
-        $asignados = Profesor_Grupo::all();
-        $grupo = GrupoModel::where('id', $alumno['Grupo_id'])->first();
-
-        foreach($asignados as $clave => $valor){
-
-            $number = $asignados[$clave];
-
-            if ($number['Grupo_id'] == $grupo['id']){
-                array_push($array, ProfesorModel::where('id', $number['Profesor_id'])->first());
-            }
-        }
-
-       $maestros = array_unique($array);
-
-       $admin = User::where('admin', true)->first();
-
-       $carrera = CarreraModel::find($grupo['Carrera_id']);
-       $turno = TurnoModel::find($grupo['Turno_id']);
-
-       return View::make("alumno/helloa", array("alumno" => $alumno, "profesores_data" => $maestros, "grupo" => $grupo, "carrera" => $carrera, "turno" => $turno));
-
-        //return View::make("welcome");
+        return $this->home($alumno_id);
     }
-
-
+    
+    
     public function surveyresponse()
     {
         $response_alumno = [
@@ -270,7 +214,6 @@ class AlumnoController extends Controller
     }
 
 
-
     public function survey($id_profesor, $carrera, $id_alumno)
     {
         $profesor = ProfesorModel::find($id_profesor);
@@ -280,46 +223,11 @@ class AlumnoController extends Controller
 
         //return view('alumno/survey')->withProfesor($profesor, $carrera);
         return View::make("alumno/survey", array("profesor" => $profesor, "carrera" => $carrera, "alumno" => $alumno));
-
-        //return dd($carrera);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function home($id){
-       //$alumno = AlumnoModel::where('idAlumno', $id)->first();
+
        $alumno = AlumnoModel::find($id);
        $array = array();
 
@@ -336,7 +244,6 @@ class AlumnoController extends Controller
         }
 
        $maestros = array_unique($array);
-       //$admin = User::find(1);
        $admin = User::where('admin', true)->first();
 
        $carrera = CarreraModel::find($grupo['Carrera_id']);

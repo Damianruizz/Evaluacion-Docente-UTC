@@ -34,5 +34,17 @@ class ProfesorTableSeeder extends Seeder
             'Apellido_Paterno'  => 'Pi',
             'Apellido_Materno'   => 'P.',
         ]);
+
+        DB::table('profesor')->insert([
+            'Nombre' => 'Julio Eernesto',
+            'Apellido_Paterno'  => 'Ponce',
+            'Apellido_Materno'   => 'de Leon',
+        ]);
+
+        DB::table('profesor')->insert([
+            'Nombre' => 'Abimael',
+            'Apellido_Paterno'  => 'Juarez',
+            'Apellido_Materno'   => 'Granados',
+        ]);
     }
 }

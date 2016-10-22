@@ -76,28 +76,34 @@ class AuthController extends Controller
 
     public function promedio_carreras($carrera){
 
-        $evaluacion = EvaluacionModel::where('carrera', $carrera)->get();
+        if (Auth::check()){
 
-        $num_evaluaciones = count($evaluacion);
+            $evaluacion = EvaluacionModel::where('carrera', $carrera)->get();
 
-        $count = 0;
-        $suma = 0;
+            $num_evaluaciones = count($evaluacion);
 
-        if ($num_evaluaciones > 0) {
-            
-            foreach($evaluacion as $clave => $valor){
-                $number = $evaluacion[$clave];
-                $suma += $number['evaluacion'];
+            $count = 0;
+            $suma = 0;
+
+            if ($num_evaluaciones > 0) {
+                
+                foreach($evaluacion as $clave => $valor){
+                    $number = $evaluacion[$clave];
+                    $suma += $number['evaluacion'];
+                }
+
+                $diez = $suma * 10;
+                $prim = $diez / 136;
+
+                $promedio = $prim/$num_evaluaciones;  
+                return $promedio;
+            } else {
+
+                return null;
             }
-
-            $diez = $suma * 10;
-            $prim = $diez / 136;
-
-            $promedio = $prim/$num_evaluaciones;  
-            return $promedio;
         } else {
-
-            return null;
+            
+            return View::make("welcome");
         }
     }
 
@@ -143,9 +149,8 @@ class AuthController extends Controller
 
         $admin = User::where('admin', true)->first();
         // Verificamos los datos
-        if (Auth::attempt($data)) // Como segundo parámetro pasámos el checkbox para sabes si queremos recordar la contraseña
-        {
-            //return "Hola, entro";
+        if (Auth::attempt($data)) {
+
             $carreras = CarreraModel::all();
             $sistemas = $this->promedio_carreras('Ing. En Sistemas Computacionales');
             $turismo = $this->promedio_carreras('Turismo');
@@ -156,6 +161,7 @@ class AuthController extends Controller
             $contabilidad = $this->promedio_carreras('Contabilidad');
             return View::make("admin/hello", array("alumnos" => $alumnos, "maestros" => $profesores_data, "admin" => $admin, "carreras" => $carreras, "sistemas" => $sistemas, "turismo" => $turismo, "admon" => $admon, "diseno" => $diseno, "pedagogia" => $pedagogia, "derecho" => $derecho, "contabilidad" => $contabilidad));
         } else {
+            
             if ($alumno = AlumnoModel::where('Matricula', $matricula)->first()) {
                 
                 if ( $alumno['Contrasena'] == $contraseña ){
@@ -163,7 +169,6 @@ class AuthController extends Controller
 
                         $grupo = GrupoModel::find($alumno['Grupo_id']);
                         $array = array();
-                        //array_push($array, "manzana", "arándano");
 
                         $asignados = Profesor_Grupo::all();
 
@@ -182,7 +187,6 @@ class AuthController extends Controller
                         $cuatrimestre = CuatrimestreModel::find($grupo['Cutrimestre_id']);
                         $turno = TurnoModel::find($grupo['Turno_id']);
                         
-                        //return dd($maestros);
                         return View::make("alumno/helloa", array("alumno" => $alumno, "profesores_data" => $maestros, "grupo" => $grupo, "carrera" => $carrera, "turno" => $turno, "cuatrimestre" => $cuatrimestre));
                     } else {
                         return View::make("disabled");
@@ -194,9 +198,7 @@ class AuthController extends Controller
             } else{
                 return View::make("welcome");
             }
-            //return View::make("welcome", array("companies" => $companies));
         }
-        // Si los datos no son los correctos volvemos al login y mostramos un error
     }
 
     public function logOut()
@@ -209,9 +211,5 @@ class AuthController extends Controller
 
             return View::make("welcome");
         }
-        // Cerramos la sesión
-        
-        // Volvemos al login y mostramos un mensaje indicando que se cerró la sesión
-        // return Redirect::intended('welcome');
     }
 }
