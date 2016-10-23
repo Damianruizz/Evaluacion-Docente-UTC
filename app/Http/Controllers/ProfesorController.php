@@ -18,26 +18,8 @@ use Illuminate\Support\Facades\Input;
 
 class ProfesorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    //Obtiene el promedio de un maestro en una carrera especifica
     public function promedio_carrera($carrera, $maestro){
 
         $evaluacion_carrera = EvaluacionModel::where('Profesor_id', $maestro['id'])->where('carrera', $carrera)->get();
@@ -70,10 +52,8 @@ class ProfesorController extends Controller
     }
 
 
-
     public function results($profesor)
     {
-        //Encontrar al maestro en la base de datos
         $maestro = ProfesorModel::find($profesor);
         //where de todas las calificaciones de ese maestro
         $evaluacion = EvaluacionModel::where('Profesor_id', $maestro['id'])->get();
@@ -95,116 +75,13 @@ class ProfesorController extends Controller
 
             $promedio = $prim/$num_evaluaciones;    
 
-            //Promedio Modulo 1
-            $count = 0;
-            $sum_modulo1 = 0;
-
-            foreach($evaluacion as $clave => $valor){
-                $number1 = $evaluacion[$clave];
-                $sum_modulo1 += $number1['modulo1'];
-            }
-
-
-            $diez1 = $sum_modulo1 * 10;
-            $prim1 = $diez1 / 20;
-
-            $prom_modulo1 = $prim1/$num_evaluaciones;    
-
-
-            //Promedio Modulo 2
-            $count = 0;
-            $sum_mod2 = 0;
-
-            foreach($evaluacion as $key => $value){
-                
-                $number2 = $evaluacion[$key];
-                $sum_mod2 += $number2['modulo2'];
-            }
-
-            $diez2 = $sum_mod2 * 10;
-            $prim2 = $diez2 / 20;
-
-            $prom_modulo2 = $prim2/$num_evaluaciones;    
-
-
-            //Promedio Modulo 3
-            $count = 0;
-            $sum_mod3 = 0;
-
-            foreach($evaluacion as $key => $value){
-                
-                $number3 = $evaluacion[$key];
-                $sum_mod3 += $number3['modulo3'];
-            }
-
-            $diez3 = $sum_mod3 * 10;
-            $prim3 = $diez3 / 24;
-
-            $prom_modulo3 = $prim3/$num_evaluaciones; 
-
-
-            //Promedio Modulo 4
-            $count = 0;
-            $sum_mod4 = 0;
-
-            foreach($evaluacion as $key => $value){
-                
-                $number4 = $evaluacion[$key];
-                $sum_mod4 += $number4['modulo4'];
-            }
-
-            $diez4 = $sum_mod4 * 10;
-            $prim4 = $diez4 / 20;
-
-            $prom_modulo4 = $prim4/$num_evaluaciones;
-
-
-            //Promedio Modulo 5
-            $count = 0;
-            $sum_mod5 = 0;
-
-            foreach($evaluacion as $key => $value){
-                
-                $number5 = $evaluacion[$key];
-                $sum_mod5 += $number5['modulo5'];
-            }
-
-            $diez5 = $sum_mod5 * 10;
-            $prim5 = $diez5 / 12;
-
-            $prom_modulo5 = $prim5/$num_evaluaciones;
-            
-
-            //Promedio Modulo 6
-            $count = 0;
-            $sum_mod6 = 0;
-
-            foreach($evaluacion as $key => $value){
-                
-                $number6 = $evaluacion[$key];
-                $sum_mod6 += $number6['modulo6'];
-            }
-
-            $diez6 = $sum_mod6 * 10;
-            $prim6 = $diez6 / 12;
-
-            $prom_modulo6 = $prim6/$num_evaluaciones;
-
-
-            //Promedio Modulo 7
-            $count = 0;
-            $sum_mod7 = 0;
-
-            foreach($evaluacion as $key => $value){
-                
-                $number7 = $evaluacion[$key];
-                $sum_mod7 += $number7['modulo7'];
-            }
-
-            $diez7 = $sum_mod7 * 10;
-            $prim7 = $diez7 / 28;
-
-            $prom_modulo7 = $prim7/$num_evaluaciones;
+            $prom_modulo1 = $this->promedio_modulos($evaluacion, 'modulo1', 20, $num_evaluaciones);  
+            $prom_modulo2 = $this->promedio_modulos($evaluacion, 'modulo2', 20, $num_evaluaciones);  
+            $prom_modulo3 = $this->promedio_modulos($evaluacion, 'modulo3', 24, $num_evaluaciones);  
+            $prom_modulo4 = $this->promedio_modulos($evaluacion, 'modulo4', 20, $num_evaluaciones);  
+            $prom_modulo5 = $this->promedio_modulos($evaluacion, 'modulo5', 12, $num_evaluaciones);  
+            $prom_modulo6 = $this->promedio_modulos($evaluacion, 'modulo6', 12, $num_evaluaciones);  
+            $prom_modulo7 = $this->promedio_modulos($evaluacion, 'modulo7', 28, $num_evaluaciones);  
                 
             $sistemas = $this->promedio_carrera('Ing. En Sistemas Computacionales', $maestro);
             $turismo = $this->promedio_carrera('Turismo', $maestro);
@@ -214,24 +91,35 @@ class ProfesorController extends Controller
             $derecho = $this->promedio_carrera('Derecho', $maestro);
             $contabilidad = $this->promedio_carrera('Contabilidad', $maestro);
 
-            //$carrera = CarreraModel::where('idCarrera', $idCarrera)->first();
-            //return dd($idCarrera);
             return View::make("admin/results", array("maestro" => $maestro, "num_evaluaciones" => $num_evaluaciones, "promedio" => $promedio, "prom_modulo1" => $prom_modulo1, "prom_modulo2" => $prom_modulo2, "prom_modulo3" => $prom_modulo3, "prom_modulo4" => $prom_modulo4, "prom_modulo5" => $prom_modulo5, "prom_modulo6" => $prom_modulo6, "prom_modulo7" => $prom_modulo7, "sistemas" => $sistemas, "turismo" => $turismo, "admon" => $admon, "diseno" => $diseno, "pedagogia" => $pedagogia, "derecho" => $derecho, "contabilidad" => $contabilidad));
         } else {
 
             return View::make("admin/nullevaluation", array("maestro" => $maestro));
         }
-
-
-        //sumarla y dividirla por el .length
-        //Y ese promedio de ese maestro se lo muestro en la vosta al administrador
     }
+
+    
+    public function promedio_modulos($evaluacion, $modulo, $divisor, $num_evaluaciones){
+
+        $count = 0;
+        $sum_modulo = 0;
+
+        foreach($evaluacion as $clave => $valor){
+            $number1 = $evaluacion[$clave];
+            $sum_modulo += $number1[$modulo];
+        }
+
+        $diez1 = $sum_modulo * 10;
+        $prim1 = $diez1 / $divisor;
+
+        return $prom_modulo = $prim1/$num_evaluaciones; 
+    }  
+
 
     public function boolean()
     {
         $option = Input::get('admin_option');
         $admin = User::where('admin', true)->first();
-        //$admin = User::find(1);
 
         $admin->evaluation = $option;
         $admin->save();
@@ -251,6 +139,8 @@ class ProfesorController extends Controller
         return View::make("admin/hello", array("alumnos" => $alumnos, "maestros" => $profesores_data, "admin" => $admin, "carreras" => $carreras, "sistemas" => $sistemas, "turismo" => $turismo, "admon" => $admon, "diseno" => $diseno, "pedagogia" => $pedagogia, "derecho" => $derecho, "contabilidad" => $contabilidad));
     }
 
+
+    //Obtiene el promedio general de todas las carreras
     public function promedio_carreras($carrera){
 
         $evaluacion = EvaluacionModel::where('carrera', $carrera)->get();
@@ -282,12 +172,9 @@ class ProfesorController extends Controller
     public function carrera_prof($idCarrera)
     {
         $carrera = CarreraModel::find($idCarrera);
-
-        //$maestros = EvaluacionModel::where('Profesor_id', $maestro['idProfesor'])->where('carrera', $carrera)->get();
         $grupos = GrupoModel::where('Carrera_id', $carrera['id'])->get();
 
         $array = array();
-        //array_push($array, "manzana", "arándano");
 
         $asignados = Profesor_Grupo::all();
         $count = 0;
@@ -324,7 +211,6 @@ class ProfesorController extends Controller
 
     public function getcomment($idProfesor)
     {
-        //return "HOLA AMIGO";
         $comentarios = CommentModel::where('Profesor_id', $idProfesor)->get();
         $profesor = ProfesorModel::find($idProfesor);
 

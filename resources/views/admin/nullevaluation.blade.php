@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout_index')
 
 @section('content')
     <!-- Top content -->

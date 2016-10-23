@@ -1,7 +1,7 @@
-@extends('layout')
+@extends('layout_index')
 
 @section('content')
-    <!-- Top content -->
+
     <div class="top-content">
         
         <div class="inner-bg">

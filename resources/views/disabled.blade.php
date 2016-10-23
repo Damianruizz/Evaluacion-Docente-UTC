@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout_index')
 
 @section('content')
     <!-- Top content -->
@@ -10,9 +10,6 @@
                     <div class="col-sm-8 col-sm-offset-2 text">
                         <h1><strong>El periodo de Evaluacion esta desactivado por el momento</strong></h1>
                         <div class="description">
-                            <p>
-                                
-                            </p>
                         </div>
                     </div>
                 </div>

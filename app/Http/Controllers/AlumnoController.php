@@ -98,15 +98,12 @@ class AlumnoController extends Controller
 
         $profesor_obj = ProfesorModel::find($profesor);
 
-        //Calculando el total
         $total = 0;
 
         foreach($response_alumno as $key => $value){
             $total += $value;
         }
 
-        //Calculando el modulo uno
-        //CINCO PREGUNTAS
         $modulo1 = 0;
         $count = 0;
 
@@ -117,80 +114,13 @@ class AlumnoController extends Controller
             $count += 1;
         }
 
-        //Calculando el modulo dos
-        //CINCO PREGUNTAS
-        $modulo2 = 0;
-        $count = 0;
+        $modulo2 = $this->count_modulo($response_alumno, 4, 9);
+        $modulo3 = $this->count_modulo($response_alumno, 9, 15);
+        $modulo4 = $this->count_modulo($response_alumno, 15, 20);
+        $modulo5 = $this->count_modulo($response_alumno, 20, 23);
+        $modulo6 = $this->count_modulo($response_alumno, 23, 26);
+        $modulo7 = $this->count_modulo($response_alumno, 26, 34);
 
-        foreach($response_alumno as $key => $value){
-            if ($count > 4 && $count <= 9){
-                $modulo2 += $value;        
-            }
-            $count += 1;
-        }
-
-
-        //Calculando el modulo tres
-        //SEIS PREGUNTAS
-        $modulo3 = 0;
-        $count = 0;
-
-        foreach($response_alumno as $key => $value){
-            if ($count > 9 && $count <= 15){
-                $modulo3 += $value;        
-            }
-            $count += 1;
-        }
-
-        //Calculando el modulo cuatro
-        //CINCO PREGUNTAS
-        $modulo4 = 0;
-        $count = 0;
-
-        foreach($response_alumno as $key => $value){
-            if ($count > 15 && $count <= 20){
-                $modulo4 += $value;        
-            }
-            $count += 1;
-        }
-
-        //Calculando el modulo cinco
-        //TRES PREGUNTAS
-        $modulo5 = 0;
-        $count = 0;
-
-        foreach($response_alumno as $key => $value){
-            if ($count > 20 && $count <= 23){
-                $modulo5 += $value;        
-            }
-            $count += 1;
-        }
-
-        //Calculando el modulo seis
-        //TRES PREGUNTAS
-        $modulo6 = 0;
-        $count = 0;
-
-        foreach($response_alumno as $key => $value){
-            if ($count > 23 && $count <= 26){
-                $modulo6 += $value;        
-            }
-            $count += 1;
-        }
-
-        //Calculando el modulo siete
-        //SIETE PREGUNTAS
-        $modulo7 = 0;
-        $count = 0;
-
-        foreach($response_alumno as $key => $value){
-            if ($count > 24 && $count <= 31){
-                $modulo7 += $value;        
-            }
-            $count += 1;
-        }
-
-        //Guardando en la base de datos
         $evaluacion_alumno = new EvaluacionModel;
 
         $evaluacion_alumno->evaluacion = $total;
@@ -207,10 +137,24 @@ class AlumnoController extends Controller
         $evaluacion_alumno->save();
 
         $alumno = AlumnoModel::find($id_alumno);
-        // Se que profesor es y que calificacion saco, la tengo que guardar despues recorrer los guardados, 
-        //sumarlos y eso es lo que voy a mostrar al administrador en la otra visa de resultados.
 
         return View::make("alumno/comments", array("profesor" => $profesor_obj, "carrera" => $carrera, "alumno" => $alumno));
+    }
+
+
+    public function count_modulo($response_alumno, $limit, $limit_two){
+
+        $suma = 0;
+        $count = 0;
+        foreach($response_alumno as $key => $value){
+            
+            if ($count > $limit && $count <= $limit_two){
+                $suma += $value;        
+            }
+            $count += 1;
+        }
+
+        return $suma;
     }
 
 
@@ -219,9 +163,6 @@ class AlumnoController extends Controller
         $profesor = ProfesorModel::find($id_profesor);
         $alumno = AlumnoModel::find($id_alumno);
 
-        //return "Hola encuesta";
-
-        //return view('alumno/survey')->withProfesor($profesor, $carrera);
         return View::make("alumno/survey", array("profesor" => $profesor, "carrera" => $carrera, "alumno" => $alumno));
     }
 

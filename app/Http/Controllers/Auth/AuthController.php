@@ -145,8 +145,6 @@ class AuthController extends Controller
 
         $profesores_data = ProfesorModel::all();
         
-
-
         $admin = User::where('admin', true)->first();
         // Verificamos los datos
         if (Auth::attempt($data)) {
