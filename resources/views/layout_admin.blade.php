@@ -11,9 +11,9 @@
 
         <title>Evaluacion Docente | UTC</title>
 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/demo.css">
-        <link rel="stylesheet" href="css/footer-distributed.css">
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/demo.css">
+        <link rel="stylesheet" href="/css/footer-distributed.css">
 
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     </head>
@@ -51,9 +51,8 @@
             <div class="footer-right">
 
                 <a target="_blank" href="https://www.facebook.com/Universidad-Tres-Culturas-UTC-157223731018347/"><i class="fa fa-facebook"></i></a>
-                <a target="_blank" href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
-                <a target="_blank" href="https://mx.linkedin.com/"><i class="fa fa-linkedin"></i></a>
-                <a target="_blank" href="https://github.com/"><i class="fa fa-github"></i></a>
+                <a target="_blank" href="http://www.utc.mx"><i class="fa fa-linkedin"></i></a>
+                <a target="_blank" href="https://github.com/Damianruizz"><i class="fa fa-github"></i></a>
 
             </div>
 

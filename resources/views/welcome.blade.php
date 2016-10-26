@@ -50,9 +50,7 @@
                             <a class="btn btn-link-2" href="https://www.facebook.com/Universidad-Tres-Culturas-157223731018347/?fref=ts" TARGET="_new">
                                 <i class="fa fa-facebook"></i> Facebook
                             </a>
-                            <a class="btn btn-link-2" href="#">
-                                <i class="fa fa-twitter"></i> Twitter
-                            </a>
+                        
                             <a class="btn btn-link-2" href="http://www.utc.mx" TARGET="_new">
                                 <i class="fa fa-google-plus"></i> Google Plus
                             </a>

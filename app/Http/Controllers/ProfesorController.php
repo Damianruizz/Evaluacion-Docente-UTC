@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use View;
 use App\User;
 use App\AlumnoModel;
@@ -52,49 +53,55 @@ class ProfesorController extends Controller
     }
 
 
-    public function results($profesor)
-    {
-        $maestro = ProfesorModel::find($profesor);
-        //where de todas las calificaciones de ese maestro
-        $evaluacion = EvaluacionModel::where('Profesor_id', $maestro['id'])->get();
+    public function results($profesor) {
 
-        //Obtener cada calificacion
-        $sum_total = 0;
-        $num_evaluaciones = count($evaluacion);
+        if (Auth::check()){
 
-        if ($num_evaluaciones != 0){
+            $maestro = ProfesorModel::find($profesor);
+            //where de todas las calificaciones de ese maestro
+            $evaluacion = EvaluacionModel::where('Profesor_id', $maestro['id'])->get();
 
-            //Promedio General
-            foreach($evaluacion as $key => $value){
-                $number = $evaluacion[$key];
-                $sum_total += $number['evaluacion'];
-            }
-            
-            $diez = $sum_total * 10;
-            $prim = $diez / 136;
+            //Obtener cada calificacion
+            $sum_total = 0;
+            $num_evaluaciones = count($evaluacion);
 
-            $promedio = $prim/$num_evaluaciones;    
+            if ($num_evaluaciones != 0){
 
-            $prom_modulo1 = $this->promedio_modulos($evaluacion, 'modulo1', 20, $num_evaluaciones);  
-            $prom_modulo2 = $this->promedio_modulos($evaluacion, 'modulo2', 20, $num_evaluaciones);  
-            $prom_modulo3 = $this->promedio_modulos($evaluacion, 'modulo3', 24, $num_evaluaciones);  
-            $prom_modulo4 = $this->promedio_modulos($evaluacion, 'modulo4', 20, $num_evaluaciones);  
-            $prom_modulo5 = $this->promedio_modulos($evaluacion, 'modulo5', 12, $num_evaluaciones);  
-            $prom_modulo6 = $this->promedio_modulos($evaluacion, 'modulo6', 12, $num_evaluaciones);  
-            $prom_modulo7 = $this->promedio_modulos($evaluacion, 'modulo7', 28, $num_evaluaciones);  
+                //Promedio General
+                foreach($evaluacion as $key => $value){
+                    $number = $evaluacion[$key];
+                    $sum_total += $number['evaluacion'];
+                }
                 
-            $sistemas = $this->promedio_carrera('Ing. En Sistemas Computacionales', $maestro);
-            $turismo = $this->promedio_carrera('Turismo', $maestro);
-            $admon = $this->promedio_carrera('Administracion de Empresas', $maestro);
-            $diseno = $this->promedio_carrera('Diseño Grafico', $maestro);
-            $pedagogia = $this->promedio_carrera('Pedagogia', $maestro);
-            $derecho = $this->promedio_carrera('Derecho', $maestro);
-            $contabilidad = $this->promedio_carrera('Contabilidad', $maestro);
+                $diez = $sum_total * 10;
+                $prim = $diez / 136;
 
-            return View::make("admin/results", array("maestro" => $maestro, "num_evaluaciones" => $num_evaluaciones, "promedio" => $promedio, "prom_modulo1" => $prom_modulo1, "prom_modulo2" => $prom_modulo2, "prom_modulo3" => $prom_modulo3, "prom_modulo4" => $prom_modulo4, "prom_modulo5" => $prom_modulo5, "prom_modulo6" => $prom_modulo6, "prom_modulo7" => $prom_modulo7, "sistemas" => $sistemas, "turismo" => $turismo, "admon" => $admon, "diseno" => $diseno, "pedagogia" => $pedagogia, "derecho" => $derecho, "contabilidad" => $contabilidad));
-        } else {
+                $promedio = $prim/$num_evaluaciones;    
 
-            return View::make("admin/nullevaluation", array("maestro" => $maestro));
+                $prom_modulo1 = $this->promedio_modulos($evaluacion, 'modulo1', 20, $num_evaluaciones);  
+                $prom_modulo2 = $this->promedio_modulos($evaluacion, 'modulo2', 20, $num_evaluaciones);  
+                $prom_modulo3 = $this->promedio_modulos($evaluacion, 'modulo3', 24, $num_evaluaciones);  
+                $prom_modulo4 = $this->promedio_modulos($evaluacion, 'modulo4', 20, $num_evaluaciones);  
+                $prom_modulo5 = $this->promedio_modulos($evaluacion, 'modulo5', 12, $num_evaluaciones);  
+                $prom_modulo6 = $this->promedio_modulos($evaluacion, 'modulo6', 12, $num_evaluaciones);  
+                $prom_modulo7 = $this->promedio_modulos($evaluacion, 'modulo7', 28, $num_evaluaciones);  
+                    
+                $sistemas = $this->promedio_carrera('Ing. En Sistemas Computacionales', $maestro);
+                $turismo = $this->promedio_carrera('Turismo', $maestro);
+                $admon = $this->promedio_carrera('Administracion de Empresas', $maestro);
+                $diseno = $this->promedio_carrera('Diseño Grafico', $maestro);
+                $pedagogia = $this->promedio_carrera('Pedagogia', $maestro);
+                $derecho = $this->promedio_carrera('Derecho', $maestro);
+                $contabilidad = $this->promedio_carrera('Contabilidad', $maestro);
+
+                return View::make("admin/results", array("maestro" => $maestro, "num_evaluaciones" => $num_evaluaciones, "promedio" => $promedio, "prom_modulo1" => $prom_modulo1, "prom_modulo2" => $prom_modulo2, "prom_modulo3" => $prom_modulo3, "prom_modulo4" => $prom_modulo4, "prom_modulo5" => $prom_modulo5, "prom_modulo6" => $prom_modulo6, "prom_modulo7" => $prom_modulo7, "sistemas" => $sistemas, "turismo" => $turismo, "admon" => $admon, "diseno" => $diseno, "pedagogia" => $pedagogia, "derecho" => $derecho, "contabilidad" => $contabilidad));
+            } else {
+
+                return View::make("admin/nullevaluation", array("maestro" => $maestro));
+            }
+        }else {
+
+            return View::make("welcome");
         }
     }
 
@@ -116,27 +123,32 @@ class ProfesorController extends Controller
     }  
 
 
-    public function boolean()
-    {
-        $option = Input::get('admin_option');
-        $admin = User::where('admin', true)->first();
+    public function boolean(){
+        if (Auth::check()){
 
-        $admin->evaluation = $option;
-        $admin->save();
+            $option = Input::get('admin_option');
+            $admin = User::where('admin', true)->first();
 
-        $alumnos = AlumnoModel::all();
-        $profesores_data = ProfesorModel::all();
-        $carreras = CarreraModel::all();
+            $admin->evaluation = $option;
+            $admin->save();
 
-        $sistemas = $this->promedio_carreras('Ing. En Sistemas Computacionales');
-        $turismo = $this->promedio_carreras('Turismo');
-        $admon = $this->promedio_carreras('Administracion de Empresas');
-        $diseno = $this->promedio_carreras('Diseño Grafico');
-        $pedagogia = $this->promedio_carreras('Pedagogia');
-        $derecho = $this->promedio_carreras('Derecho');
-        $contabilidad = $this->promedio_carreras('Contabilidad');
+            $alumnos = AlumnoModel::all();
+            $profesores_data = ProfesorModel::all();
+            $carreras = CarreraModel::all();
 
-        return View::make("admin/hello", array("alumnos" => $alumnos, "maestros" => $profesores_data, "admin" => $admin, "carreras" => $carreras, "sistemas" => $sistemas, "turismo" => $turismo, "admon" => $admon, "diseno" => $diseno, "pedagogia" => $pedagogia, "derecho" => $derecho, "contabilidad" => $contabilidad));
+            $sistemas = $this->promedio_carreras('Ing. En Sistemas Computacionales');
+            $turismo = $this->promedio_carreras('Turismo');
+            $admon = $this->promedio_carreras('Administracion de Empresas');
+            $diseno = $this->promedio_carreras('Diseño Grafico');
+            $pedagogia = $this->promedio_carreras('Pedagogia');
+            $derecho = $this->promedio_carreras('Derecho');
+            $contabilidad = $this->promedio_carreras('Contabilidad');
+
+            return View::make("admin/hello", array("alumnos" => $alumnos, "maestros" => $profesores_data, "admin" => $admin, "carreras" => $carreras, "sistemas" => $sistemas, "turismo" => $turismo, "admon" => $admon, "diseno" => $diseno, "pedagogia" => $pedagogia, "derecho" => $derecho, "contabilidad" => $contabilidad));
+        }else {
+
+            return View::make("welcome");            
+        }
     }
 
 
@@ -169,23 +181,29 @@ class ProfesorController extends Controller
     }
 
 
-    public function carrera_prof($idCarrera)
-    {
-        $carrera = CarreraModel::find($idCarrera);
-        $grupos = GrupoModel::where('Carrera_id', $carrera['id'])->get();
+    public function carrera_prof($idCarrera){
 
-        $array = array();
+        if (Auth::check()){
 
-        $asignados = Profesor_Grupo::all();
-        $count = 0;
+            $carrera = CarreraModel::find($idCarrera);
+            $grupos = GrupoModel::where('Carrera_id', $carrera['id'])->get();
 
-        $num_grupos = count($grupos);
+            $array = array();
 
-        $result = $this->counter($count, $array, $asignados, $grupos, $num_grupos);
+            $asignados = Profesor_Grupo::all();
+            $count = 0;
 
-        $maestros = array_unique($result);
+            $num_grupos = count($grupos);
 
-        return View::make("admin/profesor_carrera", array("carrera" => $carrera, "maestros" => $maestros));
+            $result = $this->counter($count, $array, $asignados, $grupos, $num_grupos);
+
+            $maestros = array_unique($result);
+
+            return View::make("admin/profesor_carrera", array("carrera" => $carrera, "maestros" => $maestros));
+        } else {
+
+            return View::make("welcome");            
+        }
     }
 
     public function counter($count, $array, $asignados, $grupos, $num_grupos)
@@ -209,11 +227,17 @@ class ProfesorController extends Controller
         }
     }
 
-    public function getcomment($idProfesor)
-    {
-        $comentarios = CommentModel::where('Profesor_id', $idProfesor)->get();
-        $profesor = ProfesorModel::find($idProfesor);
+    public function getcomment($idProfesor){
 
-        return View::make("admin/comments", array("comentarios" => $comentarios, "profesor" => $profesor));
+        if (Auth::check()){
+
+            $comentarios = CommentModel::where('Profesor_id', $idProfesor)->get();
+            $profesor = ProfesorModel::find($idProfesor);
+
+            return View::make("admin/comments", array("comentarios" => $comentarios, "profesor" => $profesor));
+        } else {
+
+            return View::make("welcome");                 
+        }
     }
 }
