@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use View;
+use Session;
 use App\User;
 use App\AlumnoModel;
 use App\ProfesorModel;
@@ -185,15 +186,20 @@ class AuthController extends Controller
                         $cuatrimestre = CuatrimestreModel::find($grupo['Cutrimestre_id']);
                         $turno = TurnoModel::find($grupo['Turno_id']);
                         
-                        return View::make("alumno/helloa", array("alumno" => $alumno, "profesores_data" => $maestros, "grupo" => $grupo, "carrera" => $carrera, "turno" => $turno, "cuatrimestre" => $cuatrimestre));
+                        Session::put('alumno', $alumno['id']);
+
+                        $alumno_sesion = Session::get('alumno');
+
+                        return View::make("alumno/helloa", array("alumno" => $alumno, "alumno_sesion" => $alumno_sesion, "profesores_data" => $maestros, "grupo" => $grupo, "carrera" => $carrera, "turno" => $turno, "cuatrimestre" => $cuatrimestre));
                     } else {
                         return View::make("disabled");
                     }
                 } else {
+                    
                     return View::make("welcome");
                 }    
-
             } else{
+                
                 return View::make("welcome");
             }
         }
@@ -207,6 +213,7 @@ class AuthController extends Controller
             return View::make("welcome");
         } else {
 
+            Session::forget('alumno');
             return View::make("welcome");
         }
     }

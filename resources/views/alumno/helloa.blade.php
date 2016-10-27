@@ -5,7 +5,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{{ URL::to('homealumn/' . $alumno['id']) }}">Inicio</a>
+                <a class="navbar-brand" href="{{ URL::to('homealumn/' . $alumno_sesion) }}">Inicio</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav" style="float: right;">
@@ -43,7 +43,7 @@
         <ul class="list-group">
             @foreach($profesores_data as $key => $value)
                 @if($profesores_data[$key])
-                    <li class="list-group-item"><a href="{{ URL::to('evaluation/'.$value->id.'/'.$carrera['descripcion'].'/'.$alumno['id']) }}" id="list" class="btn btn-primary"><h3>{{ $value->Nombre }} <?php echo "" . " " . "" ?> {{ isset($value->Apellido_Paterno) ? $value->Apellido_Paterno : 'Default' }} <?php echo "" . " " . "" ?> {{ isset($value->Apellido_Materno) ? $value->Apellido_Materno : 'Default' }}</h3></a></li>
+                    <li class="list-group-item"><a href="{{ URL::to('evaluation/'.$value->id.'/'.$carrera['descripcion']) }}" id="list" class="btn btn-primary"><h3>{{ $value->Nombre }} <?php echo "" . " " . "" ?> {{ isset($value->Apellido_Paterno) ? $value->Apellido_Paterno : 'Default' }} <?php echo "" . " " . "" ?> {{ isset($value->Apellido_Materno) ? $value->Apellido_Materno : 'Default' }}</h3></a></li>
                 @endif            
             @endforeach
         </ul>

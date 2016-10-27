@@ -124,6 +124,7 @@ class ProfesorController extends Controller
 
 
     public function boolean(){
+        
         if (Auth::check()){
 
             $option = Input::get('admin_option');

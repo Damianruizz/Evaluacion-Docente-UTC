@@ -21,7 +21,7 @@ Route::get('logout', 'Auth\AuthController@logOut');
 Route::get('homeadmin', 'Auth\AuthController@home');
 Route::get('homealumn/{alumno}', 'AlumnoController@home');
 
-Route::get('evaluation/{profesor}/{carrera}/{alumno}', ['uses' => 'AlumnoController@survey', 'as' => 'evaluation']);
+Route::get('evaluation/{profesor}/{carrera}', ['uses' => 'AlumnoController@survey', 'as' => 'evaluation']);
 Route::get('results/{profesor}', ['uses' => 'ProfesorController@results', 'as' => 'results']);
 Route::get('carrera_prof/{carrera}', ['uses' => 'ProfesorController@carrera_prof', 'as' => 'carrera_prof']);
 Route::post('boolean', ['uses' => 'ProfesorController@boolean', 'as' => 'boolean']);
