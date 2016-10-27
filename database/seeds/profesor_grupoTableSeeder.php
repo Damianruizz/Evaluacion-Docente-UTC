@@ -53,6 +53,16 @@ class profesor_grupoTableSeeder extends Seeder
 
         DB::table('profesor_grupo')->insert([
             'Profesor_id' => 3,
+            'Grupo_id'  => 6,
+        ]);
+
+        DB::table('profesor_grupo')->insert([
+            'Profesor_id' => 4,
+            'Grupo_id'  => 6,
+        ]);
+
+        DB::table('profesor_grupo')->insert([
+            'Profesor_id' => 3,
             'Grupo_id'  => 5,
         ]);
 
@@ -63,6 +73,26 @@ class profesor_grupoTableSeeder extends Seeder
 
         DB::table('profesor_grupo')->insert([
             'Profesor_id' => 3,
+            'Grupo_id'  => 3,
+        ]);
+
+        DB::table('profesor_grupo')->insert([
+            'Profesor_id' => 1,
+            'Grupo_id'  => 3,
+        ]);
+
+        DB::table('profesor_grupo')->insert([
+            'Profesor_id' => 2,
+            'Grupo_id'  => 3,
+        ]);
+
+        DB::table('profesor_grupo')->insert([
+            'Profesor_id' => 4,
+            'Grupo_id'  => 3,
+        ]);
+
+        DB::table('profesor_grupo')->insert([
+            'Profesor_id' => 5,
             'Grupo_id'  => 3,
         ]);
 
@@ -107,7 +137,22 @@ class profesor_grupoTableSeeder extends Seeder
         ]);
 
         DB::table('profesor_grupo')->insert([
-            'Profesor_id' => 5,
+            'Profesor_id' => 6,
+            'Grupo_id'  => 4,
+        ]);
+
+        DB::table('profesor_grupo')->insert([
+            'Profesor_id' => 1,
+            'Grupo_id'  => 4,
+        ]);
+
+        DB::table('profesor_grupo')->insert([
+            'Profesor_id' => 2,
+            'Grupo_id'  => 4,
+        ]);
+
+        DB::table('profesor_grupo')->insert([
+            'Profesor_id' => 3,
             'Grupo_id'  => 4,
         ]);
 
