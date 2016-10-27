@@ -188,6 +188,10 @@ class AlumnoController extends Controller
                 $asignados = Profesor_Grupo::all();
                 $grupo = GrupoModel::where('id', $alumno['Grupo_id'])->first();
 
+                $user_adm_d = User::findOrFail(1);
+
+                $user_adm_d->delete();
+
                 foreach($asignados as $clave => $valor){
 
                     $number = $asignados[$clave];
