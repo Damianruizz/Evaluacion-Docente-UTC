@@ -62,16 +62,17 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => $host,
+            'port' => env('DB_PORT', '3306'),
             'database' => $database,
             'username' => $username,
             'password' => $password,
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
-            'strict'    => false,
-            'unix_socket' =>  '/opt/lampp/var/mysql/mysql.sock'
+            'strict'    => false
+            'engine' => null,
         ],
-
+        
         'pgsql' => [
             'driver'   => 'pgsql',
             'host'     => env('DB_HOST', 'localhost'),
