@@ -62,7 +62,6 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => $host,
-            'port' => env('DB_PORT', '3306'),
             'database' => $database,
             'username' => $username,
             'password' => $password,
@@ -70,9 +69,9 @@ return [
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
             'strict'    => false
-            'engine' => null,
+            //'unix_socket' =>  '/opt/lampp/var/mysql/mysql.sock'
         ],
-        
+
         'pgsql' => [
             'driver'   => 'pgsql',
             'host'     => env('DB_HOST', 'localhost'),
