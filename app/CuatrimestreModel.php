@@ -8,7 +8,7 @@ class CuatrimestreModel extends Model
 {
     protected $table = 'cuatrimestre';
     protected $fillable = [
-        'cutrimestre',
+        'cuatrimestre',
     ];
 
     public function grupos()
