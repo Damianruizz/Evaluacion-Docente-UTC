@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProfesorGrupoTable extends Migration
+class AddUserToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,8 @@ class CreateProfesorGrupoTable extends Migration
      */
     public function up()
     {
-        Schema::create('profesor_grupo', function (Blueprint $table) {
-
-            $table->increments('id');
-            $table->string('Profesor_id');
-            $table->string('Grupo_id');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('user')->nullable();
         });
     }
 
@@ -28,6 +24,8 @@ class CreateProfesorGrupoTable extends Migration
      */
     public function down()
     {
-        Schema::drop('profesor_grupo');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('user');
+        });
     }
 }
