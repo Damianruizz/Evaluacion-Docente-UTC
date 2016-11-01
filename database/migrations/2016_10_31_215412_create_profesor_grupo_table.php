@@ -28,6 +28,6 @@ class CreateProfesorGrupoTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('profesor_grupo');
     }
 }

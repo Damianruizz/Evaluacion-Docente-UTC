@@ -35,6 +35,6 @@ class CreateEvaluacionTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('evaluacion');
     }
 }

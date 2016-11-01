@@ -28,6 +28,6 @@ class CreateCarreraTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('carrera');
     }
 }

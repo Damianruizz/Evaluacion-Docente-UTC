@@ -29,6 +29,6 @@ class CreateGrupoTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('grupo');
     }
 }

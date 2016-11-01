@@ -27,6 +27,6 @@ class CreateCuatrimestreTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('cuatrimestre');
     }
 }

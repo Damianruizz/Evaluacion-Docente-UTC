@@ -27,6 +27,6 @@ class CreateTurnoTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('turno');
     }
 }
